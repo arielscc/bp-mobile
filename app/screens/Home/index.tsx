@@ -1,6 +1,6 @@
 import {FlashList} from '@shopify/flash-list';
 import React, {useCallback, useEffect, useState} from 'react';
-import {ScrollView, View} from 'react-native';
+import {Dimensions, ScrollView, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import NoResults from '../../assets/no-results.svg';
 import ProductItem from '../../components/ProductItem';
@@ -42,13 +42,17 @@ const Home = () => {
       }}>
       <View style={CommonStyles.container}>
         <Search value={searchTerm} onChangeText={text => setSearchTerm(text)} />
-        {products.length > 0 ? (
+        {products.length ? (
           <View style={HomeStyles.flashlist}>
             <FlashList
               data={products}
               keyExtractor={item => item.id}
               renderItem={productRenderItem}
-              estimatedItemSize={180}
+              estimatedItemSize={58}
+              estimatedListSize={{
+                height: 58,
+                width: Dimensions.get('screen').width,
+              }}
               ItemSeparatorComponent={() => (
                 <View style={HomeStyles.separator} />
               )}

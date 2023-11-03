@@ -6,6 +6,9 @@ export const HomeStyles = StyleSheet.create({
     borderColor: Colors.gray,
     borderRadius: 8,
     borderWidth: 1,
+    flex: 1,
+    flexGrow: 1,
+    flexDirection: 'row',
   },
   separator: {
     borderBottomWidth: 1,
