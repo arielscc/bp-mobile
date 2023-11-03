@@ -4,10 +4,9 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Logo from '../assets/logo-horizontal.svg';
 import {MainNavigationProps, SCREENS} from '../navigation/types';
 import {Colors} from '../ui/colors';
-
-import Logo from '../../assets/logo-horizontal.svg';
 
 const Header = () => {
   const {top} = useSafeAreaInsets();
