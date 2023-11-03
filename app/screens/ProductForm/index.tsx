@@ -5,13 +5,13 @@ import {useState} from 'react';
 import {KeyboardAvoidingView, Platform, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {addYearToDate} from '../../lib/utils';
+import {validationSchema} from '../../lib/validationSchema';
 import {MainRouteProps, SCREENS} from '../../navigation/types';
 import {Colors} from '../../ui/colors';
 import Button from '../../ui/components/Button';
 import CustomDatePicker from '../../ui/components/DatePicker';
 import Input from '../../ui/components/Input';
 import {FormStyles} from './styles';
-import {validationSchema} from './validationSchema';
 
 const initialState = {
   id: '',
