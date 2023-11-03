@@ -1,7 +1,7 @@
 import {SearchIcon} from 'lucide-react-native';
 import React, {FC} from 'react';
 import {StyleSheet, TextInput, TextInputProps, View} from 'react-native';
-import {Colors} from '../../ui/colors';
+import {Colors} from '../ui/colors';
 
 interface SearchProps extends TextInputProps {}
 
