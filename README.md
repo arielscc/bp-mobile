@@ -19,7 +19,9 @@ Pantallas principales de la aplicación:
 
 ![App Screens](./assets/app.png)
 
-Nota: también existe un video en el directorio: `./assets/video.mov`
+Video:
+
+[![Video en miniatura](app/assets/logo-horizontal.svg)](./assets/video.mp4)
 
 ## Herramientas y Tecnologias utilizadas:
 
