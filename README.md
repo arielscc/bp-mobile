@@ -90,3 +90,26 @@ Caso contrario puede arrancar el proyecto directamente usando:
 ```bash
 yarn android
 ```
+
+## Consideraciones
+
+1. En el contexto de la evaluación, lamentablemente, no fue posible utilizar los servicios proporcionados debido a que no se obtuvo respuesta a las solicitudes enviadas al servicio correspondiente. Para corroborar este comportamiento, se puede considerar el siguiente ejemplo:
+
+```bash
+curl --location 'https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros/bp/products' \
+--header 'authorId: arielscc' \
+--header 'Content-Type: application/json' \
+--request POST \
+--data '{
+    "id": "bpp-test",
+    "name": "Tarjeta Visa Platinum",
+    "description": "Tarjeta de consumo bajo la modalidad de crédito con beneficios exclusivos.",
+    "logo": "https://pngimg.com/d/credit_card_PNG78.png",
+    "date_release": "2023-11-04",
+    "date_revision": "2024-11-04"
+}'
+```
+
+En consecuencia, opté por utilizar un archivo que contiene información de prueba compuesta por 20 registros aceptables, el cual se encuentra ubicado en `./app/services/data.ts`.
+
+2. Para esta prueba no se logró implementar muchos tests unitarios ni e2e.
