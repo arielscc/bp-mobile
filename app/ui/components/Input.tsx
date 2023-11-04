@@ -63,7 +63,7 @@ const InputStyles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8,
     maxHeight: 60,
-    minHeight: 30,
+    minHeight: 35,
     paddingHorizontal: 12,
     paddingTop: 6,
     textAlign: 'auto',

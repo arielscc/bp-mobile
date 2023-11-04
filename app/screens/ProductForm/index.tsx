@@ -135,7 +135,7 @@ const ProductForm = () => {
                   error={errors.date_revision as string}
                   initialDate={addYearToDate(values.date_release)}
                 />
-                <View>
+                <View style={{marginBottom: 8}}>
                   <Button
                     icon={() => <Save color={Colors.white} />}
                     onPress={async () => {

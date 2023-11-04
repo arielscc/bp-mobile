@@ -58,10 +58,7 @@ const ProductDetail = () => {
             source={{uri: logo}}
             style={DetailsStyles.image}
             accessible
-            accessibilityLabel={`daily image: ${name}`}
-            loadingIndicatorSource={{
-              cache: 'force-cache',
-            }}
+            accessibilityLabel={`product image: ${name}`}
           />
         </Pressable>
         {imageVisible && (
