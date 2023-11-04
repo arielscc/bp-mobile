@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {StyleProp, Text, View, ViewStyle} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {formatFullDate} from '../../lib/utils';
+import {formatDate} from '../../lib/utils';
 import Button from './Button';
 
 interface DatePickerProps {
@@ -42,16 +42,16 @@ const CustomDatePicker: FC<DatePickerProps> = props => {
         style={{
           paddingVertical: 8,
         }}>
-        {formatFullDate(date)}
+        {formatDate(date)}
       </Button>
       {showDatePicker && (
         <DatePicker
           date={new Date(date)}
-          mode="datetime"
+          mode="date"
           modal
           open={showDatePicker}
-          onConfirm={date => {
-            setFieldValue(value, date);
+          onConfirm={dt => {
+            setFieldValue(value, dt);
             setShowDatePicker(false);
           }}
           onCancel={() => {
