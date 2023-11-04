@@ -5,28 +5,29 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import NoResults from '../../assets/no-results.svg';
 import ProductItem from '../../components/ProductItem';
 import Search from '../../components/Search';
-import {data} from '../../services/data';
+import {useProductsContext} from '../../context/provider/ContextProvider';
+import {useProductQuery} from '../../hooks/useProductQuery';
 import {Product} from '../../services/types';
 import {CommonStyles} from '../../ui/globals';
+import HomeSkeleton from './skeleton';
 import {HomeStyles} from './styles';
 
 const Home = () => {
-  const [products, setProducts] = useState(data);
   const [searchTerm, setSearchTerm] = useState('');
-
   const {bottom} = useSafeAreaInsets();
+  const {data, isLoading} = useProductQuery();
+
+  const {products, setProducts} = useProductsContext();
 
   useEffect(() => {
-    const timeout = setTimeout(searchProduct, 200);
-    return () => clearTimeout(timeout);
-  }, [searchTerm]);
+    if (!data) return;
 
-  const searchProduct = () => {
-    const results = data.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    );
+    const results = data.filter(product => {
+      return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
     setProducts(results);
-  };
+  }, [searchTerm, data]);
 
   const productRenderItem = useCallback(
     ({item}: {item: Product}) => <ProductItem product={item} />,
@@ -42,7 +43,8 @@ const Home = () => {
       }}>
       <View style={CommonStyles.container}>
         <Search value={searchTerm} onChangeText={text => setSearchTerm(text)} />
-        {products.length ? (
+        {isLoading && <HomeSkeleton />}
+        {!isLoading && data && products.length ? (
           <View style={HomeStyles.flashlist}>
             <FlashList
               data={products}
@@ -56,13 +58,14 @@ const Home = () => {
               ItemSeparatorComponent={() => (
                 <View style={HomeStyles.separator} />
               )}
+              ListEmptyComponent={() => (
+                <View style={HomeStyles.noResultsImage}>
+                  <NoResults width={200} height={200} />
+                </View>
+              )}
             />
           </View>
-        ) : (
-          <View style={HomeStyles.noResultsImage}>
-            <NoResults width={200} height={200} />
-          </View>
-        )}
+        ) : null}
       </View>
     </ScrollView>
   );
