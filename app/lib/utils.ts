@@ -1,4 +1,4 @@
-export const formatDate = (date: string) => {
+export const formatDate = (date: string | Date) => {
   const dateObj = new Date(date);
   const month = dateObj.toLocaleString('default', {month: 'short'});
   const day = dateObj.getDate();
