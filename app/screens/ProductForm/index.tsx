@@ -1,12 +1,13 @@
-import {useRoute} from '@react-navigation/native';
 import {Formik} from 'formik';
 import {ListRestart, Save} from 'lucide-react-native';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {KeyboardAvoidingView, Platform, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useProductsContext} from '../../context/provider/ContextProvider';
+import {successToast} from '../../lib/toast';
 import {addYearToDate} from '../../lib/utils';
 import {validationSchema} from '../../lib/validationSchema';
-import {MainRouteProps, SCREENS} from '../../navigation/types';
+import {Product} from '../../services/types';
 import {Colors} from '../../ui/colors';
 import Button from '../../ui/components/Button';
 import CustomDatePicker from '../../ui/components/DatePicker';
@@ -26,8 +27,23 @@ const ProductForm = () => {
   const [showDateReleasePicker, setShowDateReleasePicker] = useState(false);
   const [showDateRevisionPicker, setShowDateRevisionPicker] = useState(false);
 
-  const route = useRoute<MainRouteProps<SCREENS.PRODUCT_FORM>>();
-  const {details} = route.params;
+  const {product, updateProduct, addProduct} = useProductsContext();
+
+  const onSubmit = (values: Product | typeof initialState) => {
+    const parseValues = {
+      ...values,
+      date_release: new Date(values.date_release).toISOString(),
+      date_revision: new Date(values.date_revision).toISOString(),
+    };
+
+    if (product) {
+      updateProduct(parseValues);
+      successToast('El producto se actualizó correctamente');
+    } else {
+      addProduct(parseValues);
+      successToast('El producto se agregó correctamente');
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -43,10 +59,12 @@ const ProductForm = () => {
           <Text style={FormStyles.title}>Formulario de Registro</Text>
 
           <Formik
-            initialValues={details ? details : initialState}
-            onReset={() => (details ? details : initialState)}
+            initialValues={product ? product : initialState}
+            onReset={() => (product ? product : initialState)}
             validationSchema={validationSchema}
-            onSubmit={values => console.log(values)}>
+            validateOnChange={false}
+            validateOnBlur={false}
+            onSubmit={values => onSubmit(values)}>
             {({
               handleChange,
               handleBlur,
@@ -63,7 +81,7 @@ const ProductForm = () => {
                   value={values.id}
                   label="ID de Producto:"
                   error={errors.id}
-                  disabled={details ? true : false}
+                  disabled={product ? true : false}
                 />
                 <Input
                   onChangeText={handleChange('name')}

@@ -1,9 +1,10 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Edit, Trash} from 'lucide-react-native';
 import React, {useState} from 'react';
-import {Alert, Image, Pressable, Text, View} from 'react-native';
+import {Alert, Image, Pressable, ScrollView, Text, View} from 'react-native';
 import EnhancedImageViewing from 'react-native-image-viewing/dist/ImageViewing';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useProductsContext} from '../../context/provider/ContextProvider';
 import {formatDate} from '../../lib/utils';
 import {
   MainNavigationProps,
@@ -16,14 +17,14 @@ import {DetailsStyles} from './styles';
 
 const ProductDetail = () => {
   const [imageVisible, setImageVisible] = useState(false);
-
   const {bottom} = useSafeAreaInsets();
 
   const route = useRoute<MainRouteProps<SCREENS.PRODUCT_DETAILS>>();
   const {details} = route.params;
-  const {date_release, date_revision, description, id, logo, name} = details;
 
   const navigation = useNavigation<MainNavigationProps>();
+  const {product, deleteProduct} = useProductsContext();
+  const {id, name, description, logo, date_release, date_revision} = product!;
 
   const DeleteProductAlert = () =>
     Alert.alert('Alerta!', `Estas seguro de eliminar el producto ${id}`, [
@@ -32,19 +33,23 @@ const ProductDetail = () => {
       },
       {
         text: 'Eliminar',
-        onPress: () => console.log('OK Pressed'),
+        onPress: () => {
+          deleteProduct(id);
+          navigation.goBack();
+        },
         style: 'destructive',
       },
     ]);
 
   return (
-    <View
+    <ScrollView
       style={[
         DetailsStyles.container,
         {
           paddingBottom: bottom,
         },
-      ]}>
+      ]}
+      bounces={false}>
       <View style={DetailsStyles.imageContainer}>
         <Pressable
           onPress={() => setImageVisible(true)}
@@ -118,7 +123,7 @@ const ProductDetail = () => {
           Eliminar
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

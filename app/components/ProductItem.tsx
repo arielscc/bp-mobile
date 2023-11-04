@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ChevronRight} from 'lucide-react-native';
 import React, {FC, memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useProductsContext} from '../context/provider/ContextProvider';
 import {MainNavigationProps, SCREENS} from '../navigation/types';
 import {Product} from '../services/types';
 import {Colors} from '../ui/colors';
@@ -14,9 +15,12 @@ const ProductItem: FC<ProductItemProps> = ({product}) => {
   const navigation = useNavigation<MainNavigationProps>();
   const {id, name} = product;
 
+  const {setProduct} = useProductsContext();
+
   return (
     <TouchableOpacity
       onPress={() => {
+        setProduct(product);
         navigation.navigate(SCREENS.PRODUCT_DETAILS, {
           details: product,
         });

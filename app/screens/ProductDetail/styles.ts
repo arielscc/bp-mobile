@@ -6,7 +6,7 @@ export const DetailsStyles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    flex: 4 / 3,
+    height: 350,
   },
   imageView: {
     backgroundColor: '#e5e5e5',

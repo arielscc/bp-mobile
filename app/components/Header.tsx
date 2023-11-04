@@ -5,6 +5,7 @@ import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Logo from '../assets/logo-horizontal.svg';
+import {useProductsContext} from '../context/provider/ContextProvider';
 import {MainNavigationProps, SCREENS} from '../navigation/types';
 import {Colors} from '../ui/colors';
 
@@ -12,6 +13,8 @@ const Header = () => {
   const {top} = useSafeAreaInsets();
   const route = useRoute();
   const navigation = useNavigation<MainNavigationProps>();
+  const {setProduct} = useProductsContext();
+
   return (
     <View
       style={[
@@ -33,6 +36,7 @@ const Header = () => {
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => {
+            setProduct();
             navigation.navigate(SCREENS.PRODUCT_FORM, {});
           }}>
           <Plus width={28} height={28} color={Colors.blue} />
