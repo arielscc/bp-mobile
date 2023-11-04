@@ -1,5 +1,9 @@
 # BP Mobile - Devsu
 
+<p align="center">
+ <img src="./app/assets/logo-horizontal.svg" alt="Descripción de la imagen" width="400px"/>
+</p>
+
 Esta es una aplicación de gestión de productos financieros, parte del reto de técnico para desarrollador: Frontend - React Native.
 
 ## Funcionalidades
@@ -21,7 +25,7 @@ Pantallas principales de la aplicación:
 
 Video:
 
-[![Video en miniatura](app/assets/logo-horizontal.svg)](./assets/video.mp4)
+Existe un video corto disponible en `./assets/video.mp4`
 
 ## Herramientas y Tecnologias utilizadas:
 
