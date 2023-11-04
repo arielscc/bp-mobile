@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import {ListRestart, Save} from 'lucide-react-native';
 import React, {useState} from 'react';
@@ -7,6 +8,7 @@ import {useProductsContext} from '../../context/provider/ContextProvider';
 import {successToast} from '../../lib/toast';
 import {addYearToDate} from '../../lib/utils';
 import {validationSchema} from '../../lib/validationSchema';
+import {MainNavigationProps} from '../../navigation/types';
 import {Product} from '../../services/types';
 import {Colors} from '../../ui/colors';
 import Button from '../../ui/components/Button';
@@ -29,6 +31,8 @@ const ProductForm = () => {
 
   const {product, updateProduct, addProduct} = useProductsContext();
 
+  const navigation = useNavigation<MainNavigationProps>();
+
   const onSubmit = (values: Product | typeof initialState) => {
     const parseValues = {
       ...values,
@@ -43,6 +47,10 @@ const ProductForm = () => {
       addProduct(parseValues);
       successToast('El producto se agregó correctamente');
     }
+
+    setTimeout(() => {
+      navigation.goBack();
+    }, 500);
   };
 
   return (
