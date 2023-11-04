@@ -144,7 +144,7 @@ const ProductForm = () => {
                     style={{
                       marginTop: 8,
                     }}>
-                    Guardar
+                    {product ? 'Actualizar' : 'Agregar'}
                   </Button>
                   <Button
                     icon={() => <ListRestart color={Colors.black} />}
