@@ -59,7 +59,7 @@ export const updateProduct = async (
 ): Promise<Product | undefined> => {
   try {
     const response: ApiResponse<Product> = await productInstance.put(
-      `/bp/products`,
+      '/bp/products',
       product,
     );
 
@@ -74,11 +74,11 @@ export const updateProduct = async (
   }
 };
 
-const deleteProduct = async (id: string): Promise<void> => {
+export const deleteProduct = async (id: string): Promise<void> => {
   try {
     const params = {id};
     const response: ApiResponse<void> = await productInstance.delete(
-      `/bp/products`,
+      '/bp/products',
       {
         params,
       },
